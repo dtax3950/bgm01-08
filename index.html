@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>82-83 BGM 播放器</title>
+  <style>
+    body { font-family: sans-serif; background-color: #f5f5f5; padding: 2rem; }
+    h1 { text-align: center; color: #333; }
+    .audio-list { max-width: 800px; margin: auto; }
+    .audio-item {
+      background: #fff;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .audio-item p { margin-bottom: 0.5rem; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>82-83 BGM 播放器</h1>
+  <div class="audio-list" id="audioList"></div>
+
+  <script>
+    const files = [
+      "01_16_crowd cheer.m4a",
+      "02_13_crowd cheer.m4a",
+      "03_5_clap.m4a",
+      "04_11_dragon fly sound.mp4",
+      "05_8_fireworks.m4a",
+      "06_3_fireworks.m4a",
+      "07_1min_cuppid.mp4",
+      "08_21_Marry you.mp4"
+    ];
+
+    // 根據前綴數字自動排序
+    files.sort((a, b) => {
+      const getNum = name => parseInt(name.split("_")[0]);
+      return getNum(a) - getNum(b);
+    });
+
+    const audioList = document.getElementById("audioList");
+
+    files.forEach(file => {
+      const item = document.createElement("div");
+      item.className = "audio-item";
+
+      const title = document.createElement("p");
+      title.textContent = file;
+
+      const audio = document.createElement("audio");
+      audio.controls = true;
+      audio.src = encodeURIComponent(file);
+
+      item.appendChild(title);
+      item.appendChild(audio);
+      audioList.appendChild(item);
+    });
+  </script>
+</body>
+</html>
